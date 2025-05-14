@@ -1,6 +1,10 @@
+# Import required libraries
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from wordcloud import WordCloud
 
-# Sample data structure (replace with your actual dataset)
+# Sample Data (Replace with your actual data loading if needed)
 data = {
     'text_length': [100, 200, 150, 300, 250, 100, 450, 380, 420, 500],
     'sentiment_score': [0.1, -0.2, 0.05, -0.1, 0.2, 0.3, -0.3, 0.15, -0.05, 0.1],
@@ -14,3 +18,47 @@ data = {
     ]
 }
 df = pd.DataFrame(data)
+
+# 1. Histogram of Article Lengths
+plt.figure(figsize=(8, 5))
+plt.hist(df['text_length'], bins=5, color='skyblue', edgecolor='black')
+plt.title('Histogram of Article Lengths')
+plt.xlabel('Text Length')
+plt.ylabel('Frequency')
+plt.tight_layout()
+plt.show()
+
+# 2. Boxplot of Sentiment Scores
+plt.figure(figsize=(6, 4))
+sns.boxplot(data=df, y='sentiment_score')
+plt.title('Boxplot of Sentiment Scores')
+plt.tight_layout()
+plt.show()
+
+# 3. Heatmap of Feature Correlation
+plt.figure(figsize=(6, 5))
+corr = df[['text_length', 'sentiment_score', 'label']].corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Heatmap of Feature Correlation')
+plt.tight_layout()
+plt.show()
+
+# 4. Word Cloud - Fake News
+fake_text = " ".join(df[df['label'] == 0]['cleaned_text'])
+wc_fake = WordCloud(width=800, height=400, background_color='white').generate(fake_text)
+plt.figure(figsize=(10, 5))
+plt.imshow(wc_fake, interpolation='bilinear')
+plt.axis('off')
+plt.title('Word Cloud - Fake News')
+plt.tight_layout()
+plt.show()
+
+# 5. Word Cloud - Real News
+real_text = " ".join(df[df['label'] == 1]['cleaned_text'])
+wc_real = WordCloud(width=800, height=400, background_color='white').generate(real_text)
+plt.figure(figsize=(10, 5))
+plt.imshow(wc_real, interpolation='bilinear')
+plt.axis('off')
+plt.title('Word Cloud - Real News')
+plt.tight_layout()
+plt.show()
