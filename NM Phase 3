@@ -1,0 +1,16 @@
+import pandas as pd
+
+# Sample data structure (replace with your actual dataset)
+data = {
+    'text_length': [100, 200, 150, 300, 250, 100, 450, 380, 420, 500],
+    'sentiment_score': [0.1, -0.2, 0.05, -0.1, 0.2, 0.3, -0.3, 0.15, -0.05, 0.1],
+    'label': [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+    'cleaned_text': [
+        "fake news government scandal", "true facts economy growth", 
+        "fake hoax viral story", "authentic report verified", 
+        "misleading claim exposure", "news confirmed sources",
+        "rumor false narrative", "official data support", 
+        "untrue gossip online", "real events documented"
+    ]
+}
+df = pd.DataFrame(data)
